@@ -11,17 +11,18 @@ app = express()
 const username = process.env.DB_NAME
 const password = process.env.DB_PASS
 
-mongoose.connect(`mongodb+srv://${username}:${password}@exercise-tracker.e4igp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, () => {
-    console.log('Connected To Db')
-})
+
+mongoose.connect(`mongodb+srv://${username}:${password}@exercise-tracker.e4igp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, () => {})
+    .then(() => console.log("Database connected!"))
+    .catch(err => console.log(err));
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Routes
-// app.use('/exercises', exerciseRouter);
-// app.use('/users', userRouter);
+app.use('/exercises', exerciseRouter);
+app.use('/users', userRouter);
 
 
 
