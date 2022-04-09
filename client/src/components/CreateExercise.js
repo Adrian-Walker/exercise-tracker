@@ -21,6 +21,13 @@ export default class CreateExercise extends Component {
         }
     }
 
+    componentDidMount() {
+        this.setState({
+            users: ['Test User'],
+            // username: 'Test User'
+        })
+    }
+
     onChangeUsername(event) {
         this.setState({
             username: event.target.value
@@ -51,6 +58,7 @@ export default class CreateExercise extends Component {
             duration: this.state.duration,
             date: this.state.date,
         }
+
         console.log(exercise);
         window.location = '/'
     }
