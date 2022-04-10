@@ -25,10 +25,10 @@ export default class CreateExercise extends Component {
     componentDidMount() {
         axios.get('http://localhost:4500/users/')
             .then(response => {
-                if (response.data.legnth > 0) {
+                if (response.data.length > 0) {
                     this.setState({
                         users: response.data.map(user => user.username),
-                        username: response.data(0).username
+                        username: response.data[0].username
                     })
                 }
             })
@@ -37,11 +37,12 @@ export default class CreateExercise extends Component {
             })
     }
 
-    onChangeUsername(event) {
+    onChangeUsername(e) {
         this.setState({
-            username: event.target.value
+            username: e.target.value
         })
     }
+
     onChangeDescription(event) {
         this.setState({
             description: event.target.value
