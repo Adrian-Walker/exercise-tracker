@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes, useParams } from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 import Navbar from "./components/Navbar";
 import ExerciseList from './components/ExerciseList'
@@ -17,7 +17,7 @@ function App() {
           <Route path="/" element={<ExerciseList />} />
           <Route path="/edit/:id" element={<EditExercise />} />
           <Route path="/create" element={<CreateExercise />} />
-          <Route path="/user" element={<CreateUser />} />
+          <Route path="/user" element={<CreateUser /> } />
         </Routes>
       </div>
     </Router>

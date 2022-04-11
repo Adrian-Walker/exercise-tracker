@@ -40,7 +40,7 @@ export default class ExerciseList extends Component {
 
     // Delete by MongoDB ID
     deleteExercise(id) {
-        axios.delete('http://loclhostL:4500/exercises/' + id)
+        axios.delete('http://localhost:4500/exercises/' + id)
             .then(res => { console.log(res.data) });
         this.setState({
             exercises: this.state.exercises.filter(element => element.id !== id)
