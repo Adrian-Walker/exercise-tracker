@@ -22,6 +22,7 @@ mongoose.connect(
     }
 )
 
+console.log(ATLAS_URI)
 
 // Middleware
 app.use(cors());
