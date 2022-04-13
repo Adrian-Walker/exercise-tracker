@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
@@ -23,5 +23,6 @@
     "nodemon": "^2.0.15",
     "npm-buildpack": "^0.1.10",
     "react-datepicker": "^4.7.0"
-  }
+  },
+  "proxy": "http://localhost:4500"
 }

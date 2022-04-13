@@ -6,9 +6,9 @@ require('dotenv').config()
 const ATLAS_URI = process.env.ATLAS_URI
 const cors = require('cors')
 const bodyParser = require('body-parser')
-
 const exerciseRouter = require('./routes/exerciseRoutes')
 const userRouter = require('./routes/userRoutes')
+const path = require("path")
 
 
 
@@ -27,13 +27,23 @@ console.log(ATLAS_URI)
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(morgan('common'))
+app.use(morgan('common'));
+app.use(express.static(path.join(__dirname, "client", "build")));
+
+
 
 // Routes
 app.use('/exercises', exerciseRouter);
 app.use('/users', userRouter);
 
+
+
 const port = process.env.PORT || 4500
+
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+
 app.listen(port, () => {
     console.log(`Server Running On Port ${port}`)
 })
