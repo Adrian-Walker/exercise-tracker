@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "../api";
 
 
 const Exercise = props => (
@@ -29,7 +30,7 @@ export default class ExerciseList extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4500/exercises/')
+        axios.get(`${BASE_URL}/exercises/`)
             .then(response => {
                 this.setState({ exercises: response.data })
             })
@@ -40,7 +41,7 @@ export default class ExerciseList extends Component {
 
     // Delete by MongoDB ID
     deleteExercise(id) {
-        axios.delete('http://localhost:4500/exercises/' + id)
+        axios.delete(`${BASE_URL}/exercises/${id}`)
             .then(res => { console.log(res.data) });
         this.setState({
             exercises: this.state.exercises.filter(element => element.id !== id)

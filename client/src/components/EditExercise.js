@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import {useParams} from "react-router-dom"
+import { useParams } from "react-router-dom"
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { BASE_URL } from '../api';
+
+console.log(process.env.NODE_ENV)
 
 class EditExercise extends Component {
   constructor(props) {
@@ -24,7 +27,7 @@ class EditExercise extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4500/exercises/'+ this.props.params.id)
+    axios.get(`${BASE_URL}/exercises/${this.props.params.id}`)
       .then(response => {
         this.setState({
           username: response.data.username,
@@ -40,7 +43,7 @@ class EditExercise extends Component {
     console.log(this.props)
     console.log(this.props.params)
 
-    axios.get('http://localhost:4500/users/')
+    axios.get(`${BASE_URL}/users/`)
       .then(response => {
         if (response.data.length > 0) {
           this.setState({
@@ -90,7 +93,7 @@ class EditExercise extends Component {
 
     console.log(exercise);
 
-    axios.post('http://localhost:4500/exercises/update/' + this.props.params.id, exercise)
+    axios.post(`${BASE_URL}/exercises/update/${this.props.params.id}`, exercise)
       .then(res => console.log(res.data));
 
     window.location = '/';
@@ -98,59 +101,59 @@ class EditExercise extends Component {
 
   render() {
     return (
-    <div>
-      <h3>Edit Exercise Log</h3>
-      <form onSubmit={this.onSubmit}>
-        <div className="form-group">
-          <label>Username: </label>
-          <select ref="userInput"
+      <div>
+        <h3>Edit Exercise Log</h3>
+        <form onSubmit={this.onSubmit}>
+          <div className="form-group">
+            <label>Username: </label>
+            <select ref="userInput"
               required
               className="form-control"
               value={this.state.username}
               onChange={this.onChangeUsername}>
               {
-                this.state.users.map(function(user) {
+                this.state.users.map(function (user) {
                   return <option
                     key={user}
                     value={user}>{user}
-                    </option>;
+                  </option>;
                 })
               }
-          </select>
-        </div>
-        <div className="form-group">
-          <label>Description: </label>
-          <input  type="text"
+            </select>
+          </div>
+          <div className="form-group">
+            <label>Description: </label>
+            <input type="text"
               required
               className="form-control"
               value={this.state.description}
               onChange={this.onChangeDescription}
-              />
-        </div>
-        <div className="form-group">
-          <label>Duration (in minutes): </label>
-          <input
+            />
+          </div>
+          <div className="form-group">
+            <label>Duration (in minutes): </label>
+            <input
               type="text"
               className="form-control"
               value={this.state.duration}
               onChange={this.onChangeDuration}
-              />
-        </div>
-        <div className="form-group">
-          <label>Date: </label>
-          <div>
-            <DatePicker
-              selected={this.state.date}
-              onChange={this.onChangeDate}
             />
           </div>
-        </div>
+          <div className="form-group">
+            <label>Date: </label>
+            <div>
+              <DatePicker
+                selected={this.state.date}
+                onChange={this.onChangeDate}
+              />
+            </div>
+          </div>
 
-        <div className="form-group">
-          <input type="submit" value="Edit Exercise Log" className="btn btn-primary" />
-        </div>
-      </form>
-    </div>
+          <div className="form-group">
+            <input type="submit" value="Edit Exercise Log" className="btn btn-primary" />
+          </div>
+        </form>
+      </div>
     )
   }
 }
