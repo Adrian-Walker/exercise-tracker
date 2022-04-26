@@ -8,6 +8,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const exerciseRouter = require('./routes/exerciseRoutes')
 const userRouter = require('./routes/userRoutes')
+const profileRouter = require("./routes/profileRoutes")
 const path = require("path")
 
 
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, "client", "build")));
 // Routes
 app.use('/exercises', exerciseRouter);
 app.use('/users', userRouter);
+app.use("/profile", profileRouter)
 
 
 
